@@ -43,7 +43,16 @@ namespace ServiceExample
                 var _in = server.AwaitSingleMessageAsync<char[]>().Result;
                 string s = new string(_in.Message);
                 Console.WriteLine("<<" + s);
-                Task.Run(async () => { await server.SendMessageToAllAsync(responce+">>" + s); }).Wait(100);
+                Task.Run(async () =>
+                {
+                    if(await is_pinged()) responce = GetFromNet();
+                        else
+                        {
+                            responce = "NOT PINGED";
+                        }
+                    ;
+                    await server.SendMessageToAllAsync(responce+">>" + s);
+                }).Wait(1000);
             }
         }
 
@@ -61,7 +70,7 @@ namespace ServiceExample
                 {
                     responce = "NOT PINGED";
                 }
-            }).Wait(2000);
+            }).Wait(1000);
         }
 
 
@@ -79,7 +88,7 @@ namespace ServiceExample
             set { }
         }
 
-        private static string responce = "";
+        private string responce = "";
 
         static string ip = "192.168.11.10.test";
         public static string GetFromNet()
@@ -88,10 +97,10 @@ namespace ServiceExample
             {
                 RequestParams d = new RequestParams();
                 d["mac"] = MyMac;
-                responce = request.Post(ip, d).ToString();
+                return request.Post(ip, d).ToString();
             }
 
-            return responce;
+            return "";
         }
 
         async Task<bool> is_pinged()
