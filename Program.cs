@@ -17,7 +17,7 @@ namespace ServiceExample
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new ServiceMain()
+                new Service()
             };
             ServiceBase.Run(ServicesToRun);
         }

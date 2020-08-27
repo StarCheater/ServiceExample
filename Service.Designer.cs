@@ -1,6 +1,6 @@
 ﻿namespace ServiceExample
 {
-    partial class ServiceMain
+    partial class Service
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -28,13 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.BW_NPipe = new System.ComponentModel.BackgroundWorker();
+            this.t_last_check = new System.Windows.Forms.Timer(this.components);
+            this.BW_last_check = new System.ComponentModel.BackgroundWorker();
             // 
-            // Service1
+            // BW_NPipe
+            // 
+            this.BW_NPipe.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BW_NPipe_DoWork);
+            // 
+            // t_last_check
+            // 
+            this.t_last_check.Enabled = true;
+            this.t_last_check.Interval = 1000;
+            this.t_last_check.Tick += new System.EventHandler(this.t_last_check_Tick);
+            // 
+            // BW_last_check
+            // 
+            this.BW_last_check.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BW_last_check_DoWork);
+            // 
+            // Service
             // 
             this.ServiceName = "Service1";
 
         }
 
         #endregion
+
+        private System.ComponentModel.BackgroundWorker BW_NPipe;
+        private System.Windows.Forms.Timer t_last_check;
+        private System.ComponentModel.BackgroundWorker BW_last_check;
     }
 }

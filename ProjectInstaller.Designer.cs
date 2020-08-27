@@ -39,9 +39,9 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "ServiceMain";
-            this.serviceInstaller1.DisplayName = "ServiceMain";
-            this.serviceInstaller1.ServiceName = "ServiceMain";
+            this.serviceInstaller1.Description = "_0";
+            this.serviceInstaller1.DisplayName = "_0";
+            this.serviceInstaller1.ServiceName = "_0";
             // 
             // ProjectInstaller
             // 
